@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SuperHero</string>
+    <string name="description_of_image_of_super_hero">Image Of Super Hero</string>
+    <string name="nameTitle">Name</string>
+    <string name="full_nameTitle">Full Name</string>
+    <string name="aliasTitle">Alias</string>
+    <string name="Alignment">Alignment</string>
+</resources>
