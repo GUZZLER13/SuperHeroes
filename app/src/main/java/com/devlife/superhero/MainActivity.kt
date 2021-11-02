@@ -6,7 +6,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.devlife.superhero.data.Result
 import com.devlife.superhero.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,6 +20,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var adapter: HeroAdapter
+    private val heroesResults = mutableListOf<Result>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +36,17 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         binding.tvTitleFullName.isVisible = false
         binding.tvTitleNameHero.isVisible = false
 
-
+        //RecyclerView
+        initRecyclerView()
     }
+
+    //RecyclerView
+    private fun initRecyclerView() {
+        adapter = HeroAdapter(heroesResults)
+        binding.rvHeroes.layoutManager = LinearLayoutManager(this)
+        binding.rvHeroes.adapter = adapter
+    }
+
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (!query.isNullOrEmpty()) {
@@ -64,20 +78,28 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             //Retour sur le thrad principal car c'est là où s'exécute le UI
             runOnUiThread {
                 if (call.isSuccessful) {
-                    binding.imHero.isVisible = true
-                    binding.tvFullName.isVisible = true
-                    binding.tvAlignment.isVisible = true
-                    binding.tvTitleAlignment.isVisible = true
-                    binding.tvTitleFullName.isVisible = true
-                    binding.tvTitleNameHero.isVisible = true
-                    val urlImage = response?.results?.get(0)?.image?.url
-                    val txtName = response?.results?.get(0)?.name
-                    val fullName = response?.results?.get(0)?.biography?.fullName
-                    val alignment = response?.results?.get(0)?.biography?.alignment
-                    binding.tvNameHero.text = txtName
-                    binding.tvFullName.text = fullName
-                    binding.tvAlignment.text = alignment
-                    Glide.with(applicationContext).load(urlImage).centerCrop().into(binding.imageHero)
+//                    binding.imHero.isVisible = true
+//                    binding.tvFullName.isVisible = true
+//                    binding.tvAlignment.isVisible = true
+//                    binding.tvTitleAlignment.isVisible = true
+//                    binding.tvTitleFullName.isVisible = true
+//                    binding.tvTitleNameHero.isVisible = true
+//                    val urlImage = response?.results?.get(0)?.image?.url
+//                    val txtName = response?.results?.get(0)?.name
+//                    val fullName = response?.results?.get(0)?.biography?.fullName
+//                    val alignment = response?.results?.get(0)?.biography?.alignment
+//                    binding.tvNameHero.text = txtName
+//                    binding.tvFullName.text = fullName
+//                    binding.tvAlignment.text = alignment
+//                    Glide.with(applicationContext).load(urlImage).centerCrop()
+//                        .into(binding.imageHero)
+
+
+                    heroesResults.clear()
+                    if (response != null) {
+                        heroesResults.addAll(response.results)
+                        adapter.notifyDataSetChanged()
+                    }
 
 
                 } else {
