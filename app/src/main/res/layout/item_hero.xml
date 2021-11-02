@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rvViewRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rVimHero"
+        android:layout_width="50dp"
+        android:layout_height="70dp"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/rvImageHero"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/heroImageDescription"
+            android:scaleType="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/rvTitleName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toTopOf="@id/rvTxtName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@id/rVimHero"
+        app:layout_constraintTop_toTopOf="@id/rVimHero"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <TextView
+        android:id="@+id/rvTxtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toTopOf="@id/rvTitleFullName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintStart_toEndOf="@id/rVimHero"
+        app:layout_constraintTop_toBottomOf="@id/rvTitleName"
+        tools:text="His Name" />
+
+    <TextView
+        android:id="@+id/rvTitleFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Full Name"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toTopOf="@id/rvTxtFullName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@id/rVimHero"
+        app:layout_constraintTop_toBottomOf="@id/rvTxtName" />
+
+    <TextView
+        android:id="@+id/rvTxtFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@id/rVimHero"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@id/rVimHero"
+        app:layout_constraintTop_toBottomOf="@id/rvTitleFullName"
+        app:layout_constraintVertical_bias="0.5"
+        tools:text="His Full Name" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

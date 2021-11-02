@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     binding.tvNameHero.text = txtName
                     binding.tvFullName.text = fullName
                     binding.tvAlignment.text = alignment
-                    Glide.with(applicationContext).load(urlImage).centerCrop().into(binding.imHero)
+                    Glide.with(applicationContext).load(urlImage).centerCrop().into(binding.imageHero)
 
 
                 } else {
