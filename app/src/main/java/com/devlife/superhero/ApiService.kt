@@ -13,5 +13,5 @@ interface ApiService {
     suspend fun getHeroeByName(@Url name: String): Response<Hero>
 
     @GET
-    suspend fun getHeroById(@Url id : String): Response<Result>
+    suspend fun getHeroById(@Url id: String): Response<Result>
 }

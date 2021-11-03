@@ -3,11 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/CODE/Guzzler/SuperHero/app/src/main/res/layout/activity_main.xml" value="0.7095205003474635" />
+        <entry key="..\:/CODE/Guzzler/SuperHero/app/src/main/res/layout/activity_main.xml" value="0.5132192846034215" />
         <entry key="..\:/CODE/Guzzler/SuperHero/app/src/main/res/layout/fragment_details.xml" value="0.3109375" />
         <entry key="..\:/CODE/Guzzler/SuperHero/app/src/main/res/layout/fragment_list.xml" value="0.5317708333333333" />
         <entry key="..\:/CODE/Guzzler/SuperHero/app/src/main/res/layout/item_dog.xml" value="0.75" />
-        <entry key="..\:/CODE/Guzzler/SuperHero/app/src/main/res/layout/item_hero.xml" value="1.1" />
+        <entry key="..\:/CODE/Guzzler/SuperHero/app/src/main/res/layout/item_hero.xml" value="0.5" />
+        <entry key="..\:/CODE/Guzzler/SuperHero/app/src/main/res/layout/item_hero2.xml" value="0.5" />
       </map>
     </option>
   </component>

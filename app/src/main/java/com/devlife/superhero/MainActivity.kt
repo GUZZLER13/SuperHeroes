@@ -18,7 +18,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
-
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: HeroAdapter
     private val heroesResults = mutableListOf<Result>()
@@ -33,25 +32,55 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         //On cache tous les éléments de la vue
         binding.imHero.isVisible = false
-        binding.tvFullName.isVisible = false
-        binding.tvAlignment.isVisible = false
-        binding.tvTitleAlignment.isVisible = false
-        binding.tvTitleFullName.isVisible = false
-        binding.tvTitleNameHero.isVisible = false
-        binding.tvNameHero.isVisible = false
         binding.rvHeroes.isVisible = false
+        binding.weight.isVisible = false
+        binding.combat.isVisible = false
+        binding.alias.isVisible = false
+        binding.align.isVisible = false
+        binding.base.isVisible = false
+        binding.durability.isVisible = false
+        binding.eye.isVisible = false
+        binding.race.isVisible = false
+        binding.height.isVisible = false
+        binding.intelligence.isVisible = false
+        binding.gender.isVisible = false
+        binding.speed.isVisible = false
+        binding.power.isVisible = false
+        binding.hair.isVisible = false
+        binding.fullName.isVisible = false
+        binding.placeBirth.isVisible = false
+        binding.firstApp.isVisible = false
+        binding.publisher.isVisible = false
+        binding.occupation.isVisible = false
+        binding.group.isVisible = false
+        binding.relatives.isVisible = false
+        binding.strength.isVisible = false
 
-        var queryIntent = intent.getStringExtra("hisId")
-        if (queryIntent != null) {
-            searchById(queryIntent)
-            queryIntent = null
+        val queryIntentId = intent.getStringExtra("hisId")
+        val queryIntentName = intent.getStringExtra("hisName")
+        val queryIntentAlign = intent.getStringExtra("hisAlignment")
+
+        if (queryIntentId != null) {
+            searchById(queryIntentId)
+            binding.svHero.isVisible = false
+
+
         } else {
             searchById("${(1..731).random()}")
+            binding.svHero.isVisible = true
+
+//            Titre de la toolbar
+//            title = "Search Your Super Hero"
         }
 
         hideKeyboard()
+
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        hideKeyboard()
+    }
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
@@ -63,7 +92,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     //Utilisation Coroutines pour requete asynchrone
-    fun searchByName(query: String) {
+    private fun searchByName(query: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val call = getRetrofit().create(ApiService::class.java).getHeroeByName("search/$query/")
             val response = call.body()
@@ -71,60 +100,97 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             runOnUiThread {
                 if (call.isSuccessful) {
                     //il n'y a qu'un seul résultat -> affichage détail
-                    when {
-                        response?.results?.size!! == 1 -> {
-                            //on cache la recyclerView et on affiche les détails
-                            binding.rvHeroes.isVisible = false
-                            binding.imHero.isVisible = true
-                            binding.tvFullName.isVisible = true
-                            binding.tvAlignment.isVisible = true
-                            binding.tvTitleAlignment.isVisible = true
-                            binding.tvTitleFullName.isVisible = true
-                            binding.tvTitleNameHero.isVisible = true
-                            binding.tvNameHero.isVisible = true
-                            //Récupération des données qui nous intéressent
-                            val urlImage = response.results[0].image.url
-                            val txtName = response.results[0].name
-                            val fullName = response.results[0].biography.fullName
-                            val alignment = response.results[0].biography.alignment
-                            //On donne les valeurs à la vue
-                            binding.tvNameHero.text = txtName
-                            binding.tvFullName.text = fullName
-                            binding.tvAlignment.text = alignment
-                            Glide.with(applicationContext).load(urlImage).centerCrop()
-                                .into(binding.imageHero)
+
+                    if (response != null) {
+                        when {
+                            response.results.size == 1 -> {
+                                //on cache la recyclerView et on affiche les détails
+                                binding.rvHeroes.isVisible = false
+                                binding.imHero.isVisible = true
+                                binding.rvHeroes.isVisible = true
+                                binding.weight.isVisible = true
+                                binding.combat.isVisible = true
+                                binding.alias.isVisible = true
+                                binding.align.isVisible = true
+                                binding.base.isVisible = true
+                                binding.durability.isVisible = true
+                                binding.eye.isVisible = true
+                                binding.race.isVisible = true
+                                binding.height.isVisible = true
+                                binding.intelligence.isVisible = true
+                                binding.gender.isVisible = true
+                                binding.speed.isVisible = true
+                                binding.power.isVisible = true
+                                binding.hair.isVisible = true
+                                binding.fullName.isVisible = true
+                                binding.placeBirth.isVisible = true
+                                binding.firstApp.isVisible = true
+                                binding.publisher.isVisible = true
+                                binding.occupation.isVisible = true
+                                binding.group.isVisible = true
+                                binding.relatives.isVisible = true
+                                binding.strength.isVisible = true
+                                //Récupération des données qui nous intéressent
+                                val urlImage = response.results[0].image.url
+                                val txtName = response.results[0].name
+                                val fullName = response.results[0].biography.fullName
+                                val alignment = response.results[0].biography.alignment
+                                //On donne les valeurs à la vue
+//                                binding.tvNameHero.text = txtName
+//                                binding.tvAlignment.text = alignment
+                                Glide.with(applicationContext).load(urlImage).centerCrop()
+                                    .into(binding.imageHero)
 
 
-                        }
+                            }
 
-                        //il y a plus d'un résultat -> affichage de la liste
-                        response.results.size > 1 -> {
+                            //il y a plus d'un résultat -> affichage de la liste
+                            response.results.size > 1 -> {
 
-                            //on cache tout sauf la recyclerview
-                            binding.rvHeroes.isVisible = true
-                            binding.imHero.isVisible = false
-                            binding.tvFullName.isVisible = false
-                            binding.tvAlignment.isVisible = false
-                            binding.tvTitleAlignment.isVisible = false
-                            binding.tvTitleFullName.isVisible = false
-                            binding.tvTitleNameHero.isVisible = false
-                            binding.tvNameHero.isVisible = false
+                                //on cache tout sauf la recyclerview
+                                binding.rvHeroes.isVisible = true
+                                binding.rvHeroes.isVisible = false
+                                binding.weight.isVisible = false
+                                binding.combat.isVisible = false
+                                binding.alias.isVisible = false
+                                binding.align.isVisible = false
+                                binding.base.isVisible = false
+                                binding.durability.isVisible = false
+                                binding.eye.isVisible = false
+                                binding.race.isVisible = false
+                                binding.height.isVisible = false
+                                binding.intelligence.isVisible = false
+                                binding.gender.isVisible = false
+                                binding.speed.isVisible = false
+                                binding.power.isVisible = false
+                                binding.hair.isVisible = false
+                                binding.fullName.isVisible = false
+                                binding.placeBirth.isVisible = false
+                                binding.firstApp.isVisible = false
+                                binding.publisher.isVisible = false
+                                binding.occupation.isVisible = false
+                                binding.group.isVisible = false
+                                binding.relatives.isVisible = false
+                                binding.strength.isVisible = false
 
-                            //Initialisation de la RecyclerView
-                            initRecyclerView()
-                            //on efface la liste des résultats
-                            heroesResults.clear()
-                            //on met dans cette liste tous les résultats
-                            heroesResults.addAll(response.results)
-                            //On prévient la recyclerView que les données ont changé
-                            adapter.notifyDataSetChanged()
-                        }
 
-                        //pas de résultat -> affichage d'un toast avec message
-                        else -> {
-                            showError("Pas de superhéro trouvé avec ce nom ... ")
+                                //Initialisation de la RecyclerView
+                                initRecyclerView()
+                                //on efface la liste des résultats
+                                heroesResults.clear()
+                                //on met dans cette liste tous les résultats
+                                heroesResults.addAll(response.results)
+                                //On prévient la recyclerView que les données ont changé
+                                adapter.notifyDataSetChanged()
+                            }
+
+                            //pas de résultat -> affichage d'un toast avec message
+                            else -> {
+                                showError("Pas de superhéro trouvé avec ce nom ... ")
+                            }
                         }
                     }
+
 
                     // Pas de réponse de la requête
                 } else {
@@ -137,7 +203,8 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
 
-    private fun searchById(id : String) {
+    private fun searchById(id: String) {
+
         CoroutineScope(Dispatchers.IO).launch {
             val call = getRetrofit().create(ApiService::class.java)
                 .getHeroById(id)
@@ -150,21 +217,49 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     //on cache la recyclerView et on affiche les détails
                     binding.rvHeroes.isVisible = false
                     binding.imHero.isVisible = true
-                    binding.tvFullName.isVisible = true
-                    binding.tvAlignment.isVisible = true
-                    binding.tvTitleAlignment.isVisible = true
-                    binding.tvTitleFullName.isVisible = true
-                    binding.tvTitleNameHero.isVisible = true
-                    binding.tvNameHero.isVisible = true
+                    binding.rvHeroes.isVisible = true
+                    binding.weight.isVisible = true
+                    binding.combat.isVisible = true
+                    binding.alias.isVisible = true
+                    binding.align.isVisible = true
+                    binding.base.isVisible = true
+                    binding.durability.isVisible = true
+                    binding.eye.isVisible = true
+                    binding.race.isVisible = true
+                    binding.height.isVisible = true
+                    binding.intelligence.isVisible = true
+                    binding.gender.isVisible = true
+                    binding.speed.isVisible = true
+                    binding.power.isVisible = true
+                    binding.hair.isVisible = true
+                    binding.fullName.isVisible = true
+                    binding.placeBirth.isVisible = true
+                    binding.firstApp.isVisible = true
+                    binding.publisher.isVisible = true
+                    binding.occupation.isVisible = true
+                    binding.group.isVisible = true
+                    binding.relatives.isVisible = true
+                    binding.strength.isVisible = true
+
+
                     //Récupération des données qui nous intéressent
-                    val urlImage = response?.image?.url
                     val txtName = response?.name
+                    val urlImage = response?.image?.url
                     val fullName = response?.biography?.fullName
                     val alignment = response?.biography?.alignment
+                    val weight = response?.appearance?.weight
+                    val height = response?.appearance?.height
+                    val race = response?.appearance?.race
+                    val gender = response?.appearance?.gender
+                    val intelligence = response?.powerstats?.intelligence
+                    val
+
                     //On donne les valeurs à la vue
-                    binding.tvNameHero.text = txtName
-                    binding.tvFullName.text = fullName
-                    binding.tvAlignment.text = alignment
+                    binding.name.text = txtName
+                    binding.fullName.text = "Full Name : ${fullName}"
+
+
+
                     Glide.with(applicationContext).load(urlImage).centerCrop()
                         .into(binding.imageHero)
 

@@ -13,7 +13,8 @@
         android:theme="@style/Theme.SuperHero">
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="Search Your SuperHero">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
