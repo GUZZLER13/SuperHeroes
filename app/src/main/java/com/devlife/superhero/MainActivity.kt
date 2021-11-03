@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 if (call.isSuccessful) {
                     //il n'y a qu'un seul résultat -> affichage détail
 
-                    if (response != null) {
+                    if (response?.response == "success") {
                         when {
                             response.results.size == 1 -> {
                                 //on cache la recyclerView et on affiche les détails
@@ -149,7 +149,6 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
                                 //on cache tout sauf la recyclerview
                                 binding.rvHeroes.isVisible = true
-                                binding.rvHeroes.isVisible = false
                                 binding.weight.isVisible = false
                                 binding.combat.isVisible = false
                                 binding.alias.isVisible = false
@@ -172,6 +171,8 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                                 binding.group.isVisible = false
                                 binding.relatives.isVisible = false
                                 binding.strength.isVisible = false
+                                binding.imHero.isVisible = false
+                                binding.name.isVisible = false
 
 
                                 //Initialisation de la RecyclerView
