@@ -6,4 +6,8 @@
     <string name="aliasTitle">Alias</string>
     <string name="Alignment">Alignment</string>
     <string name="heroImageDescription">heroImage</string>
+    <string name="alignment">Alignment :</string>
+    <string name="full_name">Full Name :</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

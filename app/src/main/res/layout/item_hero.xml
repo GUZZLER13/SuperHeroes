@@ -6,8 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rvViewRoot"
     android:layout_width="match_parent"
+    android:padding="5dp"
     android:layout_height="wrap_content"
-    android:padding="10dp"
     tools:context=".MainActivity">
 
 
@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.cardview.widget.CardView>
 
-    <TextView
+    <!-- <TextView
         android:id="@+id/rvTitleName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,30 +42,30 @@
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toEndOf="@id/rVimHero"
         app:layout_constraintTop_toTopOf="@id/rVimHero"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.5" />      -->
 
     <TextView
         android:id="@+id/rvTxtName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@id/rvTitleFullName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/rVimHero"
-        app:layout_constraintTop_toBottomOf="@id/rvTitleName"
+        app:layout_constraintTop_toTopOf="@id/rVimHero"
         tools:text="His Name" />
 
     <TextView
         android:id="@+id/rvTitleFullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Full Name :"
-        android:textSize="17sp"
+        android:text="@string/full_name"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/rvTxtFullName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/rVimHero"
         app:layout_constraintTop_toBottomOf="@id/rvTxtName" />
 
@@ -74,13 +74,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@id/rVimHero"
+        app:layout_constraintBottom_toTopOf="@id/rvTitleAlignment"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/rVimHero"
         app:layout_constraintTop_toBottomOf="@id/rvTitleFullName"
         app:layout_constraintVertical_bias="0.5"
         tools:text="His Full Name" />
+
+    <TextView
+        android:id="@+id/rvTitleAlignment"
+        android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@id/rvTxtAlignment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/rVimHero"
+        app:layout_constraintTop_toBottomOf="@id/rvTxtFullName"
+        app:layout_constraintVertical_bias="0.5"
+        android:text="@string/alignment" />
+
+    <TextView
+        android:id="@+id/rvTxtAlignment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/rVimHero"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/rVimHero"
+        app:layout_constraintTop_toBottomOf="@id/rvTitleAlignment"
+        app:layout_constraintVertical_bias="0.5"
+        tools:text="His Alignment" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
