@@ -247,16 +247,52 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     val urlImage = response?.image?.url
                     val fullName = response?.biography?.fullName
                     val alignment = response?.biography?.alignment
-                    val weight = response?.appearance?.weight
-                    val height = response?.appearance?.height
+                    val weight = response?.appearance?.weight?.get(1)
+                    val height = response?.appearance?.height?.get(1)
                     val race = response?.appearance?.race
                     val gender = response?.appearance?.gender
                     val intelligence = response?.powerstats?.intelligence
-                    val
+                    val strength = response?.powerstats?.strength
+                    val speed = response?.powerstats?.speed
+                    val durability = response?.powerstats?.durability
+                    val power = response?.powerstats?.power
+                    val combat = response?.powerstats?.combat
+                    val eye = response?.appearance?.eyeColor
+                    val hair = response?.appearance?.hairColor
+                    val alias = response?.biography?.aliases
+                    val place = response?.biography?.placeOfBirth
+                    val firstApp = response?.biography?.firstAppearance
+                    val publisher = response?.biography?.publisher
+                    val occup = response?.work?.occupation
+                    val base = response?.work?.base
+                    val group = response?.connections?.groupAffiliation
+                    val relatives = response?.connections?.relatives
 
                     //On donne les valeurs à la vue
                     binding.name.text = txtName
                     binding.fullName.text = "Full Name : ${fullName}"
+                    binding.align.text = "Alignment : ${alignment}"
+                    binding.weight.text = "Weight : ${weight}"
+                    binding.height.text = "Height : ${height}"
+                    binding.race.text = "Race : ${race}"
+                    binding.gender.text = "Gender : ${gender}"
+                    binding.intelligence.text = "Intelligence : ${intelligence}"
+                    binding.strength.text = "Strength : ${strength}"
+                    binding.speed.text = "Speed : ${speed}"
+                    binding.durability.text = "Durability : ${durability}"
+                    binding.power.text = "Power : ${power}"
+                    binding.combat.text = "Combat : ${combat}"
+                    binding.eye.text = "Eye-Color : ${eye}"
+                    binding.hair.text = "Hair-Color : ${hair}"
+                    binding.alias.text = "Aliases : ${alias}"
+                    binding.placeBirth.text = "Place Of Birth : ${place}"
+                    binding.publisher.text = "Publisher : ${publisher}"
+                    binding.occupation.text = "Occupation : ${occup}"
+                    binding.base.text = "Base : ${base}"
+                    binding.group.text = "Group Affiliation : ${group}"
+                    binding.firstApp.text = "First Appearance : ${firstApp}"
+                    binding.relatives.text = "Relatives : ${relatives}"
+
 
 
 
