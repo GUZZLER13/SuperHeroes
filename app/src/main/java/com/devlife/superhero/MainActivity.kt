@@ -1,15 +1,21 @@
 package com.devlife.superhero
 
+import android.content.pm.ActivityInfo
+import android.graphics.Color
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.devlife.superhero.api.ApiService
 import com.devlife.superhero.data.Result
 import com.devlife.superhero.databinding.ActivityMainBinding
+import com.devlife.superhero.recyclerView.HeroAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,49 +37,34 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         binding.svHero.setOnQueryTextListener(this)
 
         //On cache tous les éléments de la vue
-        binding.imHero.isVisible = false
-        binding.rvHeroes.isVisible = false
-        binding.weight.isVisible = false
-        binding.combat.isVisible = false
-        binding.alias.isVisible = false
-        binding.align.isVisible = false
-        binding.base.isVisible = false
-        binding.durability.isVisible = false
-        binding.eye.isVisible = false
-        binding.race.isVisible = false
-        binding.height.isVisible = false
-        binding.intelligence.isVisible = false
-        binding.gender.isVisible = false
-        binding.speed.isVisible = false
-        binding.power.isVisible = false
-        binding.hair.isVisible = false
-        binding.fullName.isVisible = false
-        binding.placeBirth.isVisible = false
-        binding.firstApp.isVisible = false
-        binding.publisher.isVisible = false
-        binding.occupation.isVisible = false
-        binding.group.isVisible = false
-        binding.relatives.isVisible = false
-        binding.strength.isVisible = false
+        showOrHideRecyclerView(boolRV = false, boolOthers = false)
 
         val queryIntentId = intent.getStringExtra("hisId")
-        val queryIntentName = intent.getStringExtra("hisName")
-        val queryIntentAlign = intent.getStringExtra("hisAlignment")
+//        val queryIntentName = intent.getStringExtra("hisName")
+
 
         if (queryIntentId != null) {
             searchById(queryIntentId)
-            binding.svHero.isVisible = false
+            binding.svHero.isVisible = true
+
+
+            hideUnnecessaryAndChangeColor(true)
 
 
         } else {
             searchById("${(1..731).random()}")
             binding.svHero.isVisible = true
 
+
+            hideUnnecessaryAndChangeColor(true)
+
 //            Titre de la toolbar
 //            title = "Search Your Super Hero"
         }
 
         hideKeyboard()
+
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
     }
 
@@ -100,80 +91,92 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             runOnUiThread {
                 if (call.isSuccessful) {
                     //il n'y a qu'un seul résultat -> affichage détail
-
                     if (response?.response == "success") {
                         when {
+                            //au moins deux lettres dans la recherche
+                            query.length < 2 -> {
+                                showError("Minimum 2 lettres dans la recherche")
+                            }
                             response.results.size == 1 -> {
+                                //il n'y a qu'un seul résultat -> affichage détail
                                 //on cache la recyclerView et on affiche les détails
-                                binding.rvHeroes.isVisible = false
-                                binding.imHero.isVisible = true
-                                binding.rvHeroes.isVisible = true
-                                binding.weight.isVisible = true
-                                binding.combat.isVisible = true
-                                binding.alias.isVisible = true
-                                binding.align.isVisible = true
-                                binding.base.isVisible = true
-                                binding.durability.isVisible = true
-                                binding.eye.isVisible = true
-                                binding.race.isVisible = true
-                                binding.height.isVisible = true
-                                binding.intelligence.isVisible = true
-                                binding.gender.isVisible = true
-                                binding.speed.isVisible = true
-                                binding.power.isVisible = true
-                                binding.hair.isVisible = true
-                                binding.fullName.isVisible = true
-                                binding.placeBirth.isVisible = true
-                                binding.firstApp.isVisible = true
-                                binding.publisher.isVisible = true
-                                binding.occupation.isVisible = true
-                                binding.group.isVisible = true
-                                binding.relatives.isVisible = true
-                                binding.strength.isVisible = true
+                                showOrHideRecyclerView(boolRV = false, boolOthers = true)
+
                                 //Récupération des données qui nous intéressent
-                                val urlImage = response.results[0].image.url
                                 val txtName = response.results[0].name
+                                val urlImage = response.results[0].image.url
                                 val fullName = response.results[0].biography.fullName
                                 val alignment = response.results[0].biography.alignment
+                                val weight = response.results[0].appearance.weight[1]
+                                val height = response.results[0].appearance.height[1]
+                                val race = response.results[0].appearance.race
+                                val gender = response.results[0].appearance.gender
+                                val intelligence = response.results[0].powerstats.intelligence
+                                val strength = response.results[0].powerstats.strength
+                                val speed = response.results[0].powerstats.speed
+                                val durability = response.results[0].powerstats.durability
+                                val power = response.results[0].powerstats.power
+                                val combat = response.results[0].powerstats.combat
+                                val eye = response.results[0].appearance.eyeColor
+                                val hair = response.results[0].appearance.hairColor
+                                val alias = response.results[0].biography.aliases
+                                val place = response.results[0].biography.placeOfBirth
+                                val firstApp = response.results[0].biography.firstAppearance
+                                val publisher = response.results[0].biography.publisher
+                                val occup = response.results[0].work.occupation
+                                val base = response.results[0].work.base
+                                val group = response.results[0].connections.groupAffiliation
+//                                val relatives = response.results[0].connections.relatives
+
+
                                 //On donne les valeurs à la vue
-//                                binding.tvNameHero.text = txtName
-//                                binding.tvAlignment.text = alignment
+
+
+                                binding.name.text = txtName
+                                binding.fullName.text = "${binding.fullName.text} $fullName"
+                                binding.align.text = "Alignment : $alignment"
+                                binding.weight.text = "Weight : $weight"
+                                binding.height.text = "Height : $height"
+                                binding.race.text = "Race : $race"
+                                binding.gender.text = "Gender : $gender"
+                                binding.intelligence.text = "Intelligence : $intelligence"
+                                binding.strength.text = "Strength : $strength"
+                                binding.speed.text = "Speed : $speed"
+                                binding.durability.text = "Durability : $durability"
+                                binding.power.text = "Power : $power"
+                                binding.combat.text = "Combat : $combat"
+                                binding.eye.text = "Eye-Color : $eye"
+                                binding.hair.text = "Hair-Color : $hair"
+                                binding.alias.text = "Aliases : $alias"
+                                binding.placeBirth.text = "Place Of Birth : $place"
+                                binding.publisher.text = "Publisher : $publisher"
+                                binding.occupation.text = "Occupation : $occup"
+                                binding.base.text = "Base : $base"
+                                binding.group.text = "Group Affiliation : $group"
+                                binding.firstApp.text = "First Appearance : $firstApp"
+
+
                                 Glide.with(applicationContext).load(urlImage).centerCrop()
                                     .into(binding.imageHero)
 
-
+                                hideUnnecessaryAndChangeColor(true)
                             }
+
 
                             //il y a plus d'un résultat -> affichage de la liste
                             response.results.size > 1 -> {
+                                "${response.results.size} SuperHeroes Found".also {
+                                    binding.numbers.text = it
+                                }
+
+                                //valeur SDK
+//                                val sdk = Build.VERSION.SDK_INT
+
+                                binding.viewRoot.setBackgroundColor(Color.parseColor("#000000"))
+
 
                                 //on cache tout sauf la recyclerview
-                                binding.rvHeroes.isVisible = true
-                                binding.weight.isVisible = false
-                                binding.combat.isVisible = false
-                                binding.alias.isVisible = false
-                                binding.align.isVisible = false
-                                binding.base.isVisible = false
-                                binding.durability.isVisible = false
-                                binding.eye.isVisible = false
-                                binding.race.isVisible = false
-                                binding.height.isVisible = false
-                                binding.intelligence.isVisible = false
-                                binding.gender.isVisible = false
-                                binding.speed.isVisible = false
-                                binding.power.isVisible = false
-                                binding.hair.isVisible = false
-                                binding.fullName.isVisible = false
-                                binding.placeBirth.isVisible = false
-                                binding.firstApp.isVisible = false
-                                binding.publisher.isVisible = false
-                                binding.occupation.isVisible = false
-                                binding.group.isVisible = false
-                                binding.relatives.isVisible = false
-                                binding.strength.isVisible = false
-                                binding.imHero.isVisible = false
-                                binding.name.isVisible = false
-
+                                showOrHideRecyclerView(boolRV = true, boolOthers = false)
 
                                 //Initialisation de la RecyclerView
                                 initRecyclerView()
@@ -182,16 +185,26 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                                 //on met dans cette liste tous les résultats
                                 heroesResults.addAll(response.results)
                                 //On prévient la recyclerView que les données ont changé
-                                adapter.notifyDataSetChanged()
-                            }
+                                adapter.notifyItemInserted(response.results.size)
 
-                            //pas de résultat -> affichage d'un toast avec message
-                            else -> {
-                                showError("Pas de superhéro trouvé avec ce nom ... ")
+                                binding.rvHeroes.addItemDecoration(
+                                    DividerItemDecoration(
+                                        applicationContext,
+                                        LinearLayoutManager.VERTICAL
+
+
+                                    )
+
+
+                                )
+
+                                binding.root.setBackgroundColor(Color.parseColor("#000000"))
+                                hideUnnecessaryAndChangeColor(true)
                             }
                         }
+                    } else if (response?.response == "error") {
+                        showError(getString(R.string.trySearch))
                     }
-
 
                     // Pas de réponse de la requête
                 } else {
@@ -213,35 +226,9 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             //Retour sur le thrad principal car c'est là où s'exécute le UI
             runOnUiThread {
                 if (call.isSuccessful) {
-                    //il n'y a qu'un seul résultat -> affichage détail
 
                     //on cache la recyclerView et on affiche les détails
-                    binding.rvHeroes.isVisible = false
-                    binding.imHero.isVisible = true
-                    binding.rvHeroes.isVisible = true
-                    binding.weight.isVisible = true
-                    binding.combat.isVisible = true
-                    binding.alias.isVisible = true
-                    binding.align.isVisible = true
-                    binding.base.isVisible = true
-                    binding.durability.isVisible = true
-                    binding.eye.isVisible = true
-                    binding.race.isVisible = true
-                    binding.height.isVisible = true
-                    binding.intelligence.isVisible = true
-                    binding.gender.isVisible = true
-                    binding.speed.isVisible = true
-                    binding.power.isVisible = true
-                    binding.hair.isVisible = true
-                    binding.fullName.isVisible = true
-                    binding.placeBirth.isVisible = true
-                    binding.firstApp.isVisible = true
-                    binding.publisher.isVisible = true
-                    binding.occupation.isVisible = true
-                    binding.group.isVisible = true
-                    binding.relatives.isVisible = true
-                    binding.strength.isVisible = true
-
+                    showOrHideRecyclerView(boolRV = false, boolOthers = true)
 
                     //Récupération des données qui nous intéressent
                     val txtName = response?.name
@@ -264,42 +251,61 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     val place = response?.biography?.placeOfBirth
                     val firstApp = response?.biography?.firstAppearance
                     val publisher = response?.biography?.publisher
-                    val occup = response?.work?.occupation
+                    val occupation = response?.work?.occupation
                     val base = response?.work?.base
                     val group = response?.connections?.groupAffiliation
-                    val relatives = response?.connections?.relatives
+//                    val relatives = response?.connections?.relatives
 
                     //On donne les valeurs à la vue
                     binding.name.text = txtName
-                    binding.fullName.text = "Full Name : ${fullName}"
-                    binding.align.text = "Alignment : ${alignment}"
-                    binding.weight.text = "Weight : ${weight}"
-                    binding.height.text = "Height : ${height}"
-                    binding.race.text = "Race : ${race}"
-                    binding.gender.text = "Gender : ${gender}"
-                    binding.intelligence.text = "Intelligence : ${intelligence}"
-                    binding.strength.text = "Strength : ${strength}"
-                    binding.speed.text = "Speed : ${speed}"
-                    binding.durability.text = "Durability : ${durability}"
-                    binding.power.text = "Power : ${power}"
-                    binding.combat.text = "Combat : ${combat}"
-                    binding.eye.text = "Eye-Color : ${eye}"
-                    binding.hair.text = "Hair-Color : ${hair}"
-                    binding.alias.text = "Aliases : ${alias}"
-                    binding.placeBirth.text = "Place Of Birth : ${place}"
-                    binding.publisher.text = "Publisher : ${publisher}"
-                    binding.occupation.text = "Occupation : ${occup}"
-                    binding.base.text = "Base : ${base}"
-                    binding.group.text = "Group Affiliation : ${group}"
-                    binding.firstApp.text = "First Appearance : ${firstApp}"
-                    binding.relatives.text = "Relatives : ${relatives}"
+                    binding.fullName.text = "Full Name : $fullName"
+                    binding.align.text = "Alignment : $alignment"
+                    binding.weight.text = "Weight : $weight"
+                    binding.height.text = "Height : $height"
+                    binding.race.text = "Race : $race"
+                    binding.gender.text = "Gender : $gender"
+                    binding.intelligence.text = "Intelligence : $intelligence"
+                    binding.strength.text = "Strength : $strength"
+                    binding.speed.text = "Speed : $speed"
+                    binding.durability.text = "Durability : $durability"
+                    binding.power.text = "Power : $power"
+                    binding.combat.text = "Combat : $combat"
+                    binding.eye.text = "Eye-Color : $eye"
+                    binding.hair.text = "Hair-Color : $hair"
+                    binding.alias.text = "Aliases : $alias"
+                    binding.placeBirth.text = "Place Of Birth : $place"
+                    binding.publisher.text = "Publisher : $publisher"
+                    binding.occupation.text = "Occupation : $occupation"
+                    binding.base.text = "Base : $base"
+                    binding.group.text = "Group Affiliation : $group"
+                    binding.firstApp.text = "First Appearance : $firstApp"
+//                    binding.relatives.text = "Relatives : ${relatives}"
+
+                    binding.viewRoot.setBackgroundColor(Color.parseColor("#000000"))
 
 
+//                    when (response?.biography?.alignment) {
+//                        "good" -> {
+//                            binding.viewRoot.setBackgroundColor(Color.parseColor("#559900"))
+//                        }
+//                        "bad" -> {
+//                            binding.viewRoot.setBackgroundColor(Color.parseColor("#cc181e"))
+//                        }
+//                        "neutral" -> {
+//                            binding.viewRoot.setBackgroundColor(Color.parseColor("#2793e8"))
+//                        }
+//                        else -> {
+//                            binding.viewRoot.setBackgroundColor(Color.parseColor("#000000"))
+//                        }
+//
+//                    }
 
 
                     Glide.with(applicationContext).load(urlImage).centerCrop()
                         .into(binding.imageHero)
 
+
+                    hideUnnecessaryAndChangeColor(true)
                 }
 
                 // Pas de réponse de la requête
@@ -318,14 +324,13 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (!query.isNullOrEmpty()) {
             searchByName(query.lowercase())
-//            searchRandom()
         }
-        return true
+        return false
     }
 
     //On modifie le texte de la saisie
     override fun onQueryTextChange(newText: String?): Boolean {
-        return true
+        return false
     }
 
     private fun initRecyclerView() {
@@ -340,9 +345,83 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     private fun showError(text: String) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
     }
 
+    private fun showOrHideRecyclerView(boolRV: Boolean, boolOthers: Boolean) {
 
+
+        binding.rvHeroes.isVisible = boolRV
+        binding.imHero.isVisible = boolOthers
+        binding.weight.isVisible = boolOthers
+        binding.combat.isVisible = boolOthers
+        binding.alias.isVisible = boolOthers
+        binding.numbers.isVisible = boolRV
+        binding.align.isVisible = boolOthers
+        binding.base.isVisible = boolOthers
+        binding.name.isVisible = boolOthers
+        binding.durability.isVisible = boolOthers
+        binding.eye.isVisible = boolOthers
+        binding.race.isVisible = boolOthers
+        binding.height.isVisible = boolOthers
+        binding.intelligence.isVisible = boolOthers
+        binding.gender.isVisible = boolOthers
+        binding.speed.isVisible = boolOthers
+        binding.power.isVisible = boolOthers
+        binding.hair.isVisible = boolOthers
+        binding.fullName.isVisible = boolOthers
+        binding.placeBirth.isVisible = boolOthers
+        binding.firstApp.isVisible = boolOthers
+        binding.publisher.isVisible = boolOthers
+        binding.occupation.isVisible = boolOthers
+        binding.group.isVisible = boolOthers
+//        binding.relatives.isVisible = boolOthers
+        binding.strength.isVisible = boolOthers
+    }
+
+    private fun hideUnnecessaryAndChangeColor(changeColorText: Boolean) {
+        val list = mutableListOf<TextView>()
+
+        list.add(binding.weight)
+        list.add(binding.combat)
+        list.add(binding.alias)
+        list.add(binding.align)
+        list.add(binding.base)
+        list.add(binding.gender)
+        list.add(binding.numbers)
+//        list.add(binding.name)
+        list.add(binding.durability)
+        list.add(binding.eye)
+        list.add(binding.race)
+        list.add(binding.height)
+        list.add(binding.intelligence)
+        list.add(binding.speed)
+        list.add(binding.power)
+        list.add(binding.hair)
+        list.add(binding.fullName)
+        list.add(binding.placeBirth)
+        list.add(binding.firstApp)
+        list.add(binding.publisher)
+        list.add(binding.occupation)
+        list.add(binding.group)
+        list.add(binding.strength)
+        list.add(binding.firstApp)
+
+//        list.add(binding.relatives.toString())
+
+        for (element in list) {
+            if (element.text.contains("[-]") || element.text.contains("-") || element.text.contains(
+                    "null"
+                ) || element.text.contains("0 kg") || element.text.contains("0 cm") || element.text.isNullOrEmpty() || element.text == "Full Name : "
+            ) {
+                element.isVisible = false
+            }
+
+            if (changeColorText) {
+                element.setTextColor(Color.parseColor("#eeeeee"))
+                binding.name.setTextColor(Color.parseColor("#eeeeee"))
+
+            }
+        }
+    }
 }
-

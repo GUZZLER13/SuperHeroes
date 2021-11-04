@@ -13,8 +13,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/rVimHero"
-        android:layout_width="110dp"
-        android:layout_height="140dp"
+        android:layout_width="90dp"
+        android:layout_height="120dp"
         app:cardCornerRadius="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -47,14 +47,27 @@
         android:id="@+id/rvTxtName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/rVimHero"
+        app:layout_constraintBottom_toTopOf="@id/rvPubli"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/rVimHero"
         app:layout_constraintTop_toTopOf="@id/rVimHero"
         tools:text="His Name" />
+
+    <TextView
+        android:id="@+id/rvPubli"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/rVimHero"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/rVimHero"
+        app:layout_constraintTop_toBottomOf="@id/rvTxtName"
+        tools:text="His Publisher" />
     <!--
     <TextView
         android:id="@+id/rvTitleFullName"

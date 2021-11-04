@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gender">Genre :</string>
+    <string name="combat">Combat :</string>
+    <string name="power">Pouvoir :</string>
+    <string name="durability">Résistance :</string>
+    <string name="speed">Vitesse :</string>
+    <string name="strength">Force :</string>
+    <string name="intelligence">Intelligence :</string>
+    <string name="full_name">Vrai nom :</string>
+    <string name="race">Race :</string>
+    <string name="height">Hauteur :</string>
+    <string name="weight">Poids :</string>
+    <string name="eye">Yeux :</string>
+    <string name="hair">Cheveux :</string>
+    <string name="alias">Alias :</string>
+    <string name="placeBirth">Né(e) à :</string>
+    <string name="firstApp">1ère Apparition :</string>
+    <string name="publisher">Editeur :</string>
+    <string name="occupation">Job :</string>
+    <string name="base">Lieu :</string>
+    <string name="group">Groupe :</string>
+    <string name="search">Cherchez un Super-Héro</string>
+    <string name="trySearch">Pas de résultats…</string>
+
+</resources>

@@ -1,366 +1,424 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/viewRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="2dp"
     tools:context=".MainActivity">
 
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/svHero"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/teal_700"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvHeroes"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="52dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/svHero">
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
 
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/imHero"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="65dp"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/svHero">
-
-        <ImageView
-            android:id="@+id/imageHero"
-            android:layout_width="200dp"
-            android:layout_height="250dp"
-            android:background="@color/black"
-            android:contentDescription="@string/description_of_image_of_super_hero"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/svHero"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/purple_700"
+            android:focusable="false"
+            android:iconifiedByDefault="false"
+            app:defaultQueryHint="@string/search"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintCircleRadius="16dp"
-            app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name" />
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="His Name"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/imHero"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="@id/imHero"
-        app:layout_constraintTop_toBottomOf="@id/svHero"
-
-        />
-
-    <TextView
-        android:id="@+id/weight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/weight"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toTopOf="@id/height"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toEndOf="@id/imHero"
-        app:layout_constraintTop_toTopOf="@id/imHero" />
-
-    <TextView
-        android:id="@+id/height"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/height"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toTopOf="@id/race"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toEndOf="@id/imHero"
-        app:layout_constraintTop_toBottomOf="@id/weight" />
-
-    <TextView
-        android:id="@+id/race"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/race"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toTopOf="@id/gender"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toEndOf="@id/imHero"
-        app:layout_constraintTop_toBottomOf="@id/height" />
-
-    <TextView
-        android:id="@+id/gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/gender"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toTopOf="@id/intelligence"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toEndOf="@id/imHero"
-        app:layout_constraintTop_toBottomOf="@id/race" />
-
-    <TextView
-        android:id="@+id/intelligence"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/intelligence"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toTopOf="@id/strength"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toEndOf="@id/imHero"
-        app:layout_constraintTop_toBottomOf="@id/gender" />
-
-    <TextView
-        android:id="@+id/strength"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/strength"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toTopOf="@id/speed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toEndOf="@id/imHero"
-        app:layout_constraintTop_toBottomOf="@id/intelligence" />
-
-    <TextView
-        android:id="@+id/speed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/speed"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toTopOf="@id/durability"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toEndOf="@id/imHero"
-        app:layout_constraintTop_toBottomOf="@id/strength" />
-
-    <TextView
-        android:id="@+id/durability"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/durability"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toTopOf="@id/power"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toEndOf="@id/imHero"
-        app:layout_constraintTop_toBottomOf="@id/speed" />
-
-    <TextView
-        android:id="@+id/power"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/power"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toTopOf="@id/combat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toEndOf="@id/imHero"
-        app:layout_constraintTop_toBottomOf="@id/durability" />
-
-    <TextView
-        android:id="@+id/combat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/combat"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toTopOf="@id/eye"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toEndOf="@id/imHero"
-        app:layout_constraintTop_toBottomOf="@id/power" />
-
-    <TextView
-        android:id="@+id/eye"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/eye"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toTopOf="@id/hair"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toEndOf="@id/imHero"
-        app:layout_constraintTop_toBottomOf="@id/combat" />
-
-    <TextView
-        android:id="@+id/hair"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hair"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="@id/imHero"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toEndOf="@id/imHero"
-        app:layout_constraintTop_toBottomOf="@id/eye" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imHero"
-        app:layout_constraintVertical_bias="0.2">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0"
+            app:queryHint="@string/search" />
 
         <TextView
-            android:id="@+id/fullName"
-            android:textSize="13sp"
-android:layout_marginTop="6dp"
+            android:id="@+id/numbers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="5dp"
-            android:text="@string/full_name" />
-
-        <TextView
-            android:id="@+id/alias"
-            android:layout_width="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textSize="13sp"
-
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@string/alias" />
-
-        <TextView
-            android:id="@+id/placeBirth"
-            android:layout_width="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textSize="13sp"
-
-            android:layout_height="wrap_content"
-
-            android:layout_marginStart="8dp"
-            android:text="@string/placeBirth" />
-
-        <TextView
-            android:id="@+id/firstApp"
-            android:layout_width="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textSize="13sp"
-
-            android:layout_height="wrap_content"
-
-            android:layout_marginStart="8dp"
-            android:text="@string/firstApp" />
-
-        <TextView
-            android:id="@+id/publisher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textSize="13sp"
-
-
-            android:layout_marginStart="8dp"
-            android:text="@string/publisher" />
-
-        <TextView
-            android:id="@+id/align"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textSize="13sp"
-
-
-            android:layout_marginStart="8dp"
-            android:text="@string/align" />
-
-        <TextView
-            android:id="@+id/occupation"
-            android:layout_width="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textSize="13sp"
-
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-
-            android:text="@string/occupation" />
-
-        <TextView
-            android:id="@+id/base"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-
-            android:textSize="13sp"
-
-            android:layout_marginStart="8dp"
-            android:text="@string/base" />
-
-        <TextView
-            android:id="@+id/group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textSize="13sp"
-
-            android:layout_marginStart="8dp"
-            android:text="@string/group" />
-
-        <TextView
-            android:id="@+id/relatives"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textSize="13sp"
-
-            android:layout_marginStart="8dp"
-            android:text="@string/relatives" />
-
-
-    </LinearLayout>
-
-
-    <!--
-
-        <TextView
-            android:id="@+id/tvTitleAlignment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Alignment"
+            android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imHero"
+            app:layout_constraintBottom_toTopOf="@id/rvHeroes"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.05"
-            app:layout_constraintStart_toEndOf="@+id/imHero"
-            app:layout_constraintTop_toBottomOf="@id/tvTitleNameHero"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/svHero"
+            app:layout_constraintVertical_bias="0.5"
+            tools:text="Numbers of Heroes"
 
-        <TextView
-            android:id="@+id/tvAlignment"
+
+            />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvHeroes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="52dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/numbers">
+
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imHero"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/tvTitleAlignment"
+            android:layout_marginStart="8dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toTopOf="@id/linear2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            app:layout_constraintVertical_bias="0.5">
+
+            <ImageView
+                android:id="@+id/imageHero"
+                android:layout_width="200dp"
+                android:layout_height="230dp"
+                android:background="@color/black"
+                android:contentDescription="@string/description_of_image_of_super_hero"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintCircleRadius="16dp"
+                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name" />
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/imHero"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.1"
-            app:layout_constraintStart_toEndOf="@+id/tvTitleAlignment"
-            app:layout_constraintTop_toTopOf="@id/tvTitleAlignment"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/imHero"
+            app:layout_constraintTop_toBottomOf="@id/svHero"
             app:layout_constraintVertical_bias="0.5"
-            tools:text="His Alignment" />
+            tools:text="His Name" />
 
-            -->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/imHero"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintStart_toEndOf="@id/imHero"
+            app:layout_constraintTop_toTopOf="@id/imHero">
+
+
+            <TextView
+                android:id="@+id/weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weight"
+                android:textAlignment="textStart"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toTopOf="@id/height"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toEndOf="@id/imHero"
+                app:layout_constraintTop_toTopOf="@id/imHero" />
+
+            <TextView
+                android:id="@+id/height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/height"
+                android:textAlignment="textStart"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toTopOf="@id/race"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toEndOf="@id/imHero"
+                app:layout_constraintTop_toBottomOf="@id/weight" />
+
+            <TextView
+                android:id="@+id/race"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/race"
+                android:textAlignment="textStart"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toTopOf="@id/gender"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toEndOf="@id/imHero"
+                app:layout_constraintTop_toBottomOf="@id/height" />
+
+            <TextView
+                android:id="@+id/gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gender"
+                android:textAlignment="textStart"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toTopOf="@id/intelligence"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toEndOf="@id/imHero"
+                app:layout_constraintTop_toBottomOf="@id/race" />
+
+            <TextView
+                android:id="@+id/intelligence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/intelligence"
+                android:textAlignment="textStart"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toTopOf="@id/strength"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toEndOf="@id/imHero"
+                app:layout_constraintTop_toBottomOf="@id/gender" />
+
+            <TextView
+                android:id="@+id/strength"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/strength"
+                android:textAlignment="textStart"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toTopOf="@id/speed"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toEndOf="@id/imHero"
+                app:layout_constraintTop_toBottomOf="@id/intelligence" />
+
+            <TextView
+                android:id="@+id/speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/speed"
+                android:textAlignment="textStart"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toTopOf="@id/durability"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toEndOf="@id/imHero"
+                app:layout_constraintTop_toBottomOf="@id/strength" />
+
+            <TextView
+                android:id="@+id/durability"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/durability"
+                android:textAlignment="textStart"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toTopOf="@id/power"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toEndOf="@id/imHero"
+                app:layout_constraintTop_toBottomOf="@id/speed" />
+
+            <TextView
+                android:id="@+id/power"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/power"
+                android:textAlignment="textStart"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toTopOf="@id/combat"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toEndOf="@id/imHero"
+                app:layout_constraintTop_toBottomOf="@id/durability" />
+
+            <TextView
+                android:id="@+id/combat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/combat"
+                android:textAlignment="textStart"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toTopOf="@id/eye"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toEndOf="@id/imHero"
+                app:layout_constraintTop_toBottomOf="@id/power" />
+
+            <TextView
+                android:id="@+id/eye"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/eye"
+                android:textAlignment="textStart"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toTopOf="@id/hair"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toEndOf="@id/imHero"
+                app:layout_constraintTop_toBottomOf="@id/combat" />
+
+            <TextView
+                android:id="@+id/hair"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hair"
+                android:textAlignment="textStart"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@id/imHero"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toEndOf="@id/imHero"
+                app:layout_constraintTop_toBottomOf="@id/eye" />
+
+
+        </LinearLayout>
+
+
+        <!--
+
+            <TextView
+                android:id="@+id/tvTitleAlignment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Alignment"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imHero"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintStart_toEndOf="@+id/imHero"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleNameHero"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <TextView
+                android:id="@+id/tvAlignment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTitleAlignment"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toEndOf="@+id/tvTitleAlignment"
+                app:layout_constraintTop_toTopOf="@id/tvTitleAlignment"
+                app:layout_constraintVertical_bias="0.5"
+                tools:text="His Alignment" />
+
+                -->
+
+
+        <LinearLayout
+            android:id="@+id/linear2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imHero"
+            app:layout_constraintVertical_bias="0.2">
+
+            <TextView
+                android:id="@+id/fullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/full_name"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/alias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="5dp"
+                android:text="@string/alias"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/placeBirth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="5dp"
+
+                android:text="@string/placeBirth"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/firstApp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="5dp"
+
+                android:text="@string/firstApp"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/publisher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+
+
+                android:text="@string/publisher"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/align"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+
+
+                android:text="@string/align"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/occupation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="5dp"
+                android:text="@string/occupation"
+
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/base"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="5dp"
+
+                android:text="@string/base"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+
+                android:text="@string/group"
+                android:textSize="13sp" />
+
+            <!--   <TextView
+                   android:id="@+id/relatives"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginBottom="5dp"
+                   android:textSize="13sp"
+
+                   android:layout_marginStart="8dp"
+                   android:text="@string/relatives" />
+
+       -->
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>

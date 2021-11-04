@@ -1,4 +1,4 @@
-package com.devlife.superhero
+package com.devlife.superhero.api
 
 import com.devlife.superhero.data.Hero
 import com.devlife.superhero.data.Result

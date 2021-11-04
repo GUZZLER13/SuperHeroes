@@ -1,14 +1,14 @@
 <resources>
-    <string name="app_name">SuperHero</string>
-    <string name="description_of_image_of_super_hero">Image Of Super Hero</string>
-    <string name="nameTitle">Name :</string>
-    <string name="full_nameTitle">Full Name :</string>
-    <string name="aliasTitle">Alias :</string>
+    <string name="app_name" translatable="false">SuperHero</string>
+    <string name="description_of_image_of_super_hero" translatable="false">Image Of Super Hero</string>
+    <string name="nameTitle" translatable="false">Name :</string>
+    <string name="full_nameTitle" translatable="false">Full Name :</string>
+    <string name="aliasTitle" translatable="false">Alias :</string>
     <string name="Alignment">Alignment :</string>
-    <string name="heroImageDescription">heroImage</string>
+    <string name="heroImageDescription" translatable="false">heroImage</string>
     <string name="alignment">Alignment :</string>
     <string name="full_name">Full Name :</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="intelligence">Intelligence :</string>
     <string name="strength">Strength :</string>
     <string name="speed">Speed :</string>
@@ -29,5 +29,8 @@
     <string name="occupation">Occupation :</string>
     <string name="base">Base :</string>
     <string name="group">Group affiliation :</string>
-    <string name="relatives">Relatives :</string>
+    <string name="relatives" translatable="false">Relatives :</string>
+    <string name="search">Search Your SuperHero</string>
+    <string name="fab" translatable="false">fab</string>
+    <string name="trySearch">No results…</string>
 </resources>
