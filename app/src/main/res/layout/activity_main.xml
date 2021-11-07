@@ -272,37 +272,6 @@
 
         </LinearLayout>
 
-
-        <!--
-
-            <TextView
-                android:id="@+id/tvTitleAlignment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Alignment"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/imHero"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.05"
-                app:layout_constraintStart_toEndOf="@+id/imHero"
-                app:layout_constraintTop_toBottomOf="@id/tvTitleNameHero"
-                app:layout_constraintVertical_bias="0.5" />
-
-            <TextView
-                android:id="@+id/tvAlignment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/tvTitleAlignment"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.1"
-                app:layout_constraintStart_toEndOf="@+id/tvTitleAlignment"
-                app:layout_constraintTop_toTopOf="@id/tvTitleAlignment"
-                app:layout_constraintVertical_bias="0.5"
-                tools:text="His Alignment" />
-
-                -->
-
-
         <LinearLayout
             android:id="@+id/linear2"
             android:layout_width="match_parent"
@@ -405,17 +374,15 @@
                 android:text="@string/group"
                 android:textSize="13sp" />
 
-            <!--   <TextView
-                   android:id="@+id/relatives"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_marginBottom="5dp"
-                   android:textSize="13sp"
+            <TextView
+                android:id="@+id/relatives"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@string/relatives"
+                android:textSize="13sp" />
 
-                   android:layout_marginStart="8dp"
-                   android:text="@string/relatives" />
 
-       -->
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

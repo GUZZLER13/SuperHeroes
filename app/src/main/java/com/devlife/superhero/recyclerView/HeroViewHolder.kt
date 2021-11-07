@@ -2,6 +2,7 @@ package com.devlife.superhero.recyclerView
 
 import android.graphics.Color
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -24,13 +25,13 @@ class HeroViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         binding.rvPubli.setTextColor(Color.parseColor("#eeeeee"))
 
 
-//        itemView.setOnClickListener {
-//            Toast.makeText(
-//                itemView.context,
-//                "tu as sélectionné ${binding.rvTxtName.text}",
-//                Toast.LENGTH_LONG
-//            ).show()
-//
-//        }
+        itemView.setOnClickListener {
+            Toast.makeText(
+                itemView.context,
+                "tu as sélectionné ${binding.rvTxtName.text}",
+                Toast.LENGTH_LONG
+            ).show()
+
+        }
     }
 }

@@ -119,21 +119,19 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                                 val combat = response.results[0].powerstats.combat
                                 val eye = response.results[0].appearance.eyeColor
                                 val hair = response.results[0].appearance.hairColor
-                                val alias = response.results[0].biography.aliases
+                                val alias = response.results[0].biography.aliases.toString().replace("[", "").replace("]", "")
                                 val place = response.results[0].biography.placeOfBirth
                                 val firstApp = response.results[0].biography.firstAppearance
                                 val publisher = response.results[0].biography.publisher
                                 val occup = response.results[0].work.occupation
                                 val base = response.results[0].work.base
                                 val group = response.results[0].connections.groupAffiliation
-//                                val relatives = response.results[0].connections.relatives
+                                val relatives = response.results[0].connections.relatives
 
 
                                 //On donne les valeurs à la vue
-
-
                                 binding.name.text = txtName
-                                binding.fullName.text = "${binding.fullName.text} $fullName"
+                                binding.fullName.text = "Full Name : $fullName"
                                 binding.align.text = "Alignment : $alignment"
                                 binding.weight.text = "Weight : $weight"
                                 binding.height.text = "Height : $height"
@@ -154,6 +152,79 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                                 binding.base.text = "Base : $base"
                                 binding.group.text = "Group Affiliation : $group"
                                 binding.firstApp.text = "First Appearance : $firstApp"
+                                binding.relatives.text = "Relatives : ${relatives}"
+
+                                if (alias == "-") {
+                                    binding.alias.isVisible = false
+                                }
+                                if (txtName == "-") {
+                                    binding.name.isVisible = false
+                                }
+                                if (fullName == "-") {
+                                    binding.fullName.isVisible = false
+                                }
+                                if (alignment == "-") {
+                                    binding.align.isVisible = false
+                                }
+                                if (weight == "-") {
+                                    binding.weight.isVisible = false
+                                }
+                                if (height == "-") {
+                                    binding.height.isVisible = false
+                                }
+                                if (race == "-") {
+                                    binding.race.isVisible = false
+                                }
+                                if (gender == "-") {
+                                    binding.gender.isVisible = false
+                                }
+                                if (intelligence == "-") {
+                                    binding.intelligence.isVisible = false
+                                }
+                                if (strength == "-") {
+                                    binding.strength.isVisible = false
+                                }
+                                if (speed == "-") {
+                                    binding.speed.isVisible = false
+                                }
+                                if (durability == "-") {
+                                    binding.combat.isVisible = false
+                                }
+                                if (power == "-") {
+                                    binding.power.isVisible = false
+                                }
+                                if (combat == "-") {
+                                    binding.combat.isVisible = false
+                                }
+                                if (eye == "-") {
+                                    binding.eye.isVisible = false
+                                }
+                                if (hair == "-") {
+                                    binding.hair.isVisible = false
+                                }
+                                if (place == "-") {
+                                    binding.placeBirth.isVisible = false
+                                }
+                                if (firstApp == "-") {
+                                    binding.firstApp.isVisible = false
+                                }
+                                if (publisher == "-") {
+                                    binding.publisher.isVisible = false
+                                }
+                                if (occup == "-") {
+                                    binding.occupation.isVisible = false
+                                }
+                                if (base == "-") {
+                                    binding.base.isVisible = false
+                                }
+                                if (group == "-") {
+                                    binding.group.isVisible = false
+                                }
+                                if (relatives == "-") {
+                                    binding.relatives.isVisible = false
+                                }
+
+
 
 
                                 Glide.with(applicationContext).load(urlImage).centerCrop()
@@ -247,14 +318,16 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     val combat = response?.powerstats?.combat
                     val eye = response?.appearance?.eyeColor
                     val hair = response?.appearance?.hairColor
-                    val alias = response?.biography?.aliases
+                    val alias =
+                        response?.biography?.aliases.toString().replace("[", "").replace("]", "")
                     val place = response?.biography?.placeOfBirth
                     val firstApp = response?.biography?.firstAppearance
                     val publisher = response?.biography?.publisher
                     val occupation = response?.work?.occupation
                     val base = response?.work?.base
                     val group = response?.connections?.groupAffiliation
-//                    val relatives = response?.connections?.relatives
+                    val relatives = response?.connections?.relatives
+
 
                     //On donne les valeurs à la vue
                     binding.name.text = txtName
@@ -279,7 +352,80 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     binding.base.text = "Base : $base"
                     binding.group.text = "Group Affiliation : $group"
                     binding.firstApp.text = "First Appearance : $firstApp"
-//                    binding.relatives.text = "Relatives : ${relatives}"
+                    binding.relatives.text = "Relatives : ${relatives}"
+
+                    if (alias == "-") {
+                        binding.alias.isVisible = false
+                    }
+                    if (txtName == "-") {
+                        binding.name.isVisible = false
+                    }
+                    if (fullName == "-") {
+                        binding.fullName.isVisible = false
+                    }
+                    if (alignment == "-") {
+                        binding.align.isVisible = false
+                    }
+                    if (weight == "-") {
+                        binding.weight.isVisible = false
+                    }
+                    if (height == "-") {
+                        binding.height.isVisible = false
+                    }
+                    if (race == "-") {
+                        binding.race.isVisible = false
+                    }
+                    if (gender == "-") {
+                        binding.gender.isVisible = false
+                    }
+                    if (intelligence == "-") {
+                        binding.intelligence.isVisible = false
+                    }
+                    if (strength == "-") {
+                        binding.strength.isVisible = false
+                    }
+                    if (speed == "-") {
+                        binding.speed.isVisible = false
+                    }
+                    if (durability == "-") {
+                        binding.combat.isVisible = false
+                    }
+                    if (power == "-") {
+                        binding.power.isVisible = false
+                    }
+                    if (combat == "-") {
+                        binding.combat.isVisible = false
+                    }
+                    if (eye == "-") {
+                        binding.eye.isVisible = false
+                    }
+                    if (hair == "-") {
+                        binding.hair.isVisible = false
+                    }
+                    if (place == "-") {
+                        binding.placeBirth.isVisible = false
+                    }
+                    if (firstApp == "-") {
+                        binding.firstApp.isVisible = false
+                    }
+                    if (publisher == "-") {
+                        binding.publisher.isVisible = false
+                    }
+                    if (occupation == "-") {
+                        binding.occupation.isVisible = false
+                    }
+                    if (base == "-") {
+                        binding.base.isVisible = false
+                    }
+                    if (group == "-") {
+                        binding.group.isVisible = false
+                    }
+                    if (relatives == "-") {
+                        binding.relatives.isVisible = false
+                    }
+
+
+
 
                     binding.viewRoot.setBackgroundColor(Color.parseColor("#000000"))
 
@@ -375,47 +521,58 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         binding.publisher.isVisible = boolOthers
         binding.occupation.isVisible = boolOthers
         binding.group.isVisible = boolOthers
-//        binding.relatives.isVisible = boolOthers
+        binding.relatives.isVisible = boolOthers
         binding.strength.isVisible = boolOthers
     }
 
     private fun hideUnnecessaryAndChangeColor(changeColorText: Boolean) {
-        val list = mutableListOf<TextView>()
+        val listTextView = mutableListOf<TextView>()
 
-        list.add(binding.weight)
-        list.add(binding.combat)
-        list.add(binding.alias)
-        list.add(binding.align)
-        list.add(binding.base)
-        list.add(binding.gender)
-        list.add(binding.numbers)
+
+        listTextView.add(binding.weight)
+        listTextView.add(binding.combat)
+        listTextView.add(binding.alias)
+        listTextView.add(binding.align)
+        listTextView.add(binding.base)
+        listTextView.add(binding.gender)
+        listTextView.add(binding.numbers)
 //        list.add(binding.name)
-        list.add(binding.durability)
-        list.add(binding.eye)
-        list.add(binding.race)
-        list.add(binding.height)
-        list.add(binding.intelligence)
-        list.add(binding.speed)
-        list.add(binding.power)
-        list.add(binding.hair)
-        list.add(binding.fullName)
-        list.add(binding.placeBirth)
-        list.add(binding.firstApp)
-        list.add(binding.publisher)
-        list.add(binding.occupation)
-        list.add(binding.group)
-        list.add(binding.strength)
-        list.add(binding.firstApp)
+        listTextView.add(binding.durability)
+        listTextView.add(binding.eye)
+        listTextView.add(binding.race)
+        listTextView.add(binding.height)
+        listTextView.add(binding.intelligence)
+        listTextView.add(binding.speed)
+        listTextView.add(binding.power)
+        listTextView.add(binding.hair)
+        listTextView.add(binding.fullName)
+        listTextView.add(binding.placeBirth)
+        listTextView.add(binding.firstApp)
+        listTextView.add(binding.publisher)
+        listTextView.add(binding.occupation)
+        listTextView.add(binding.group)
+        listTextView.add(binding.strength)
+        listTextView.add(binding.firstApp)
+        listTextView.add(binding.relatives)
+
 
 //        list.add(binding.relatives.toString())
 
-        for (element in list) {
-            if (element.text.contains("[-]") || element.text.contains("-") || element.text.contains(
+        for (element in listTextView) {
+            if (element.text.contains("[-]") || element.text == "-" || element.text == "- " || element.text.contains(
                     "null"
-                ) || element.text.contains("0 kg") || element.text.contains("0 cm") || element.text.isNullOrEmpty() || element.text == "Full Name : "
+                )
+                || element.text.contains("0 kg") || element.text.contains("0 cm")
+                || element.text.isNullOrEmpty() || element.text == "Full Name : "
             ) {
                 element.isVisible = false
             }
+
+
+
+
+
+
 
             if (changeColorText) {
                 element.setTextColor(Color.parseColor("#eeeeee"))
